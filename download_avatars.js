@@ -2,6 +2,10 @@ var request = require('request');
 var token = require('./secrets').GITHUB_TOKEN;
 var fs = require('fs');
 
+var firstArg = process.argv[2];
+
+var secondArg = process.argv[3];
+
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -30,7 +34,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(firstArg, secondArg, function(err, result) {
   console.log("Errors:", err);
 });
 
@@ -48,5 +52,4 @@ request.get(url)
 
 }
 
-// downloadImageByURL(, "avatar/kvirani.jpg")
 
