@@ -5,7 +5,7 @@ var fs = require('fs');
 var firstArg = process.argv[2];
 
 var secondArg = process.argv[3];
-
+console.log("Type of: " + typeof secondArg);
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -33,23 +33,22 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
-
-getRepoContributors(firstArg, secondArg, function(err, result) {
-  console.log("Errors:", err);
-});
-
+if (secondArg === undefined) {
+  console.log("Error, must enter two arguments")
+} else {
+  getRepoContributors(firstArg, secondArg, function(err, result) {
+    console.log("Errors:", err);
+  });
+}
 
 function downloadImageByURL(url, filePath) {
 
-request.get(url)
+  request.get(url)
 
-  .on('error', function (err) {
-    throw err;
-  })
-
-
-  .pipe(fs.createWriteStream(filePath));
-
-}
+    .on('error', function (err) {
+      throw err;
+    })
+    .pipe(fs.createWriteStream(filePath));
+  }
 
 
